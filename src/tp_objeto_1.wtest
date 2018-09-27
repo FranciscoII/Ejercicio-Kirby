@@ -1,0 +1,52 @@
+import rolando.*
+import hechizos.*
+
+describe "Tests de la parte 1" {
+	
+	fixture{
+		rolando.cambiarHechizo(espectroMalefico)
+		espectroMalefico.cambiarNombre("Espectro Malefico")
+		
+	}
+	
+	
+	test "El nivel de hechiceria de Rolando es 56" {
+
+		assert.equals(56,rolando.nivelDeHechiceria())
+
+	}
+
+	test "El nivel de hechiceria de Rolando es 125 despues de cambiar el nombre de su hechizo preferido"{
+	
+		espectroMalefico.cambiarNombre('espectro superrecontramalefico muajajaja')
+		assert.equals(125,rolando.nivelDeHechiceria())
+	}
+
+	test "El nivel de hechiceria de Rolando es 35 despues de cambiar su hechizo preferido a hechizo basico "{
+	
+		rolando.cambiarHechizo(hechizoBasico)
+		assert.equals(35,rolando.nivelDeHechiceria())
+	}
+
+	test "El nivel de hechiceria de Rolando es 61 despues de ocurrir un eclipse"{
+	
+		eclipse.ocurrirEclipse(rolando)
+		assert.equals(61,rolando.nivelDeHechiceria())
+	}
+
+	test "Espectro malefico es poderoso" {
+	
+		assert.that(espectroMalefico.esPoderoso())
+	}
+
+	test "Espectro malefico no es poderoso despues de cambiar su nombre a 'pepe'"{
+	
+		espectroMalefico.cambiarNombre('pepe')
+		assert.notThat(espectroMalefico.esPoderoso())
+	}
+
+	test "Hechizo basico no es poderoso"{
+	
+		assert.notThat(hechizoBasico.esPoderoso())
+	}
+}
