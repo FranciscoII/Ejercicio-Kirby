@@ -50,7 +50,7 @@ object espejo{
 	}
 	
 	method habilidadDeLucha(duenio){
-		if(rolando.soloTieneEspejo()){return 0}
+		if(duenio.soloTieneEspejo()){return 0}
 		else{
 			return self.reflejo(duenio).habilidadDeLucha(duenio)
 		}
