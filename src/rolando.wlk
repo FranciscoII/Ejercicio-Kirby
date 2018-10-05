@@ -2,59 +2,76 @@ import hechizos.*
 import artefactos.*
 import refuerzos.*
 
+object fuerzaOscura{
+	var valor = 5
+	
+	method valor() = valor
+	
+	method valor(valorNuevo){
+		valor = valorNuevo
+	}
+}
+
 object rolando{
-	var hechizoPreferido = espectroMalefico
+	var hechizoPreferido 
 	var valorBaseLucha = 1
 	var artefactos = []
-	var fuerzaOscura = 5
 	
-	method fuerzaOscura() = fuerzaOscura
 	
-	method cambiarFuerzaOscura(valorNuevo){
-		fuerzaOscura = valorNuevo
-	}
+	method hechizoPreferido() = hechizoPreferido
 	
-	method cambiarHechizo(hechizo){
+	method hechizoPreferido(hechizo){
 		hechizoPreferido = hechizo
 	}
 	
+	method artefactos()= artefactos	
+	
+	method valorBaseLucha() = valorBaseLucha
+	
 	method recibirEclipse(){
 		
-		self.cambiarFuerzaOscura(self.fuerzaOscura() * 2)
+		fuerzaOscura.valor(fuerzaOscura.valor() * 2)
 	}
 	
 	method nivelDeHechiceria(){
-		return 3 * hechizoPreferido.poder() + self.fuerzaOscura()
+		return 3 * self.hechizoPreferido().poder() + fuerzaOscura.valor()
 	}
 	
 	method seCreePoderoso(){
-		return hechizoPreferido.esPoderoso()
+		return self.hechizoPreferido().esPoderoso()
 	}
 	
-	method cambiarValorBaseLucha(valorNuevo){
+	method valorBaseLucha(valorNuevo){
 		valorBaseLucha = valorNuevo
 	}
 	
+	method agregarArtefactos(unosArtefactos){
+		self.artefactos().addAll(unosArtefactos)
+	}
+	
 	method agregarArtefacto(artefacto){
-		artefactos.add(artefacto)
+		self.agregarArtefactos(artefacto)
 	}
 	
 	method removerArtefacto(artefacto){
-		artefactos.remove(artefacto)
+		self.artefactos().remove(artefacto)
 	}
 	
 	method habilidadDeLucha(){
-		return valorBaseLucha + artefactos.sum({artefacto => artefacto.habilidadDeLucha(self)})
+		return self.valorBaseLucha() + self.artefactos().sum({artefacto => artefacto.habilidadDeLucha(self)})
 	}
 	
 	method mayorHabilidadLuchaQueNivelHechiceria(){
 		return self.habilidadDeLucha() > self.nivelDeHechiceria()
 	}
 	
-	method listaArtefactos()= artefactos	
+	
+	method limpiarArtefactos(){
+		self.artefactos().clear()
+	}
 	
 	method artefactosSinEspejo(){
-		return artefactos.filter({artefacto => !artefacto.equals(espejo)})
+		return self.artefactos().filter({artefacto => !artefacto.equals(espejo)})
 	}
 	
 	method mejorArtefacto(){
@@ -62,10 +79,14 @@ object rolando{
 	}
 		
 	method soloTieneEspejo(){
-		return artefactos.all({artefacto => artefacto.equals(espejo)})
+		return self.artefactos().all({artefacto => artefacto.equals(espejo)})
 	}
 	
-	method cantArtefactos() = artefactos.size()
+	method artefactoSoloEspejo(){
+		self.artefactos().removeAllSuchThat({artefacto => !artefacto.equals(espejo)})
+	}
+	
+	method cantArtefactos() = self.artefactos().size()
 	
 	method estaCargado(){
 		return self.cantArtefactos() >= 5

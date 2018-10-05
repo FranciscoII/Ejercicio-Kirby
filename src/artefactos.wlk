@@ -12,7 +12,9 @@ object espadaDelDestino{
 object collarDivino{
 	var cantPerlas = 5
 	
-	method cambiarCantPerlas(cant){
+	method cantPerlas() = cantPerlas
+	
+	method cantPerlas(cant){
 		cantPerlas = cant
 	}
 	method habilidadDeLucha(duenio) = cantPerlas
@@ -22,24 +24,26 @@ object collarDivino{
 object mascaraOscura{
 	
 	method habilidadDeLucha(duenio){
-		return 4.max(duenio.fuerzaOscura()/2)
+		return 4.max(fuerzaOscura.valor()/2)
 	}
 
 }
 
 object armadura{
-	 var refuerzo = ningunRefuerzo	
+	 var refuerzo
+	 
+	 method refuerzo() = refuerzo
+	 
+	 method refuerzo(refuerzoNuevo){
+	 	refuerzo = refuerzoNuevo
+	 }
 	 
 	 method habilidadDeLucha(duenio){
 	 	
-	 		return 2 + refuerzo.habilidadDeLucha(duenio)
-	 }
-	 
-	 method cambiarRefuerzo(refuerzoNuevo){
-	 	refuerzo = refuerzoNuevo
-	 }
+	 		return 2 + self.refuerzo().habilidadDeLucha(duenio)
+	 }	 
+	
 }
-
 
 
 object espejo{

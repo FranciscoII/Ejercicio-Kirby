@@ -6,13 +6,10 @@ import refuerzos.*
 describe "Tests de la parte 3" {
 	
 	fixture{
-		rolando.cambiarHechizo(espectroMalefico)
-		espectroMalefico.cambiarNombre("Espectro Malefico")
-		rolando.agregarArtefacto(espadaDelDestino)
-		rolando.agregarArtefacto(collarDivino)
-		rolando.agregarArtefacto(mascaraOscura)
-		rolando.agregarArtefacto(armadura)
-		rolando.agregarArtefacto(espejo)	
+		rolando.hechizoPreferido(espectroMalefico)
+		espectroMalefico.nombre("Espectro Malefico")
+		armadura.refuerzo(ningunRefuerzo)	
+		rolando.agregarArtefactos([espadaDelDestino,collarDivino,mascaraOscura,armadura,espejo])
 	}
 
 	test "Rolando esta cargado" {
@@ -34,39 +31,39 @@ describe "Tests de la parte 3" {
 
 	test "La habilidad de lucha de armadura de Rolando es 58 si tiene una bendicion de refuerzo"{
 	
-		armadura.cambiarRefuerzo(bendicion)
+		armadura.refuerzo(bendicion)
 		assert.equals(58,armadura.habilidadDeLucha(rolando))
 	}
 
 	test "La habilidad de lucha de armadura de Rolando es 3 si tiene una cota de malla de refuerzo"{
 	
-		armadura.cambiarRefuerzo(cotaDeMalla)
+		armadura.refuerzo(cotaDeMalla)
 		assert.equals(3,armadura.habilidadDeLucha(rolando))
 	}
 
 	test "La habilidad de lucha de armadura de Rolando es 12 si tiene hechizo basico de refuerzo"{
 	
 	
-		armadura.cambiarRefuerzo(hechizoBasico)
+		armadura.refuerzo(hechizoBasico)
 		assert.equals(12,armadura.habilidadDeLucha(rolando))
 	}
 
 	test "La habilidad de lucha de armadura de Rolando es 19 si tiene hechizo espectro malefico de refuerzo"{
 	
-		armadura.cambiarRefuerzo(espectroMalefico)
+		armadura.refuerzo(espectroMalefico)
 		assert.equals(19,armadura.habilidadDeLucha(rolando))
 	}
 
 	test "La habilidad de lucha de Rolado es 1 si solo tiene espejo como artefacto"{
 	
-		rolando.listaArtefactos().removeAllSuchThat({artefacto => !artefacto.equals(espejo)})
+		rolando.artefactoSoloEspejo()
 		assert.equals(1,rolando.habilidadDeLucha())
 	}
 
 	test "El nivel de hechiceria de Rolando es 56 si reemplazar al hechizo preferido por un libro de hechizos que contenga el espectro maléfico (con nombre “espectro maléfico”) y al hechizo básico.
 	"{
-	
-		rolando.cambiarHechizo(libroDeHechizos)
+		
+		rolando.hechizoPreferido(libroDeHechizos)
 		assert.equals(56,rolando.nivelDeHechiceria())
 	
 	}
