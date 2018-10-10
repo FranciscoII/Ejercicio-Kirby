@@ -1,48 +1,65 @@
-import rolando.*
+import personaje.*
 import hechizos.*
 import refuerzos.*
 
-
-object espadaDelDestino{
+class Espada{
 	
 	method habilidadDeLucha(duenio) = 3
+	
+	method precio() = 15
+
+}
+
+class Hacha{
+	
+	method habilidadDeLucha(duenio) = 3
+	
+	method precio() = 15
+
+}
+
+class Lanza{
+	
+	method habilidadDeLucha(duenio) = 3
+	
+	method precio() = 15
 
 }
 
 object collarDivino{
-	var cantPerlas = 5
-	
-	method cantPerlas() = cantPerlas
-	
-	method cantPerlas(cant){
-		cantPerlas = cant
-	}
+	var property cantPerlas = 5
+
 	method habilidadDeLucha(duenio) = cantPerlas
 	
+	method precio() = 2 * cantPerlas
+	
 }
 
-object mascaraOscura{
+class Mascara{
+	var property indiceOscuridad = 0
+	var property valorLuchaMinimo = 4
+	
+	method valorLucha() = fuerzaOscura.valor() / 2 * indiceOscuridad
 	
 	method habilidadDeLucha(duenio){
-		return 4.max(fuerzaOscura.valor()/2)
+		return valorLuchaMinimo.max(self.valorLucha())
 	}
 
 }
 
-object armadura{
-	 var refuerzo
-	 
-	 method refuerzo() = refuerzo
-	 
-	 method refuerzo(refuerzoNuevo){
-	 	refuerzo = refuerzoNuevo
-	 }
-	 
+class Armadura{
+	 var property refuerzo = ningunRefuerzo
+	 var property valorBase = 2
+	 	 
 	 method habilidadDeLucha(duenio){
 	 	
-	 		return 2 + self.refuerzo().habilidadDeLucha(duenio)
+	 		return valorBase + refuerzo.habilidadDeLucha(duenio)
 	 }	 
-	
+	 
+	 method precio() {
+		return refuerzo.costo(self)
+	 }
+	 
 }
 
 
@@ -54,12 +71,44 @@ object espejo{
 	}
 	
 	method habilidadDeLucha(duenio){
+		
 		if(duenio.soloTieneEspejo()){return 0}
 		else{
 			return self.reflejo(duenio).habilidadDeLucha(duenio)
 		}
 	}		
+	
+	method precio() = 90
 
 }
+
+
+object libroDeHechizos{
+	var hechizos = []
+	
+	method hechizos() = hechizos
+	
+	method agregarHechizos(unosHechizos){
+		
+		self.hechizos().addAll(unosHechizos)
+	}
+	
+	method hechizosPoderosos(){
+		return self.hechizos().filter({hechizo => hechizo.esPoderoso()})
+	}
+	
+	method poder(){
+		return self.hechizosPoderosos().sum({hechizo => hechizo.poder()})
+	}
+	
+	method cantHechizos() = self.hechizos().size()
+		
+	method precio(){
+		return 10 * self.cantHechizos()
+	}
+	
+}
+
+
 
 

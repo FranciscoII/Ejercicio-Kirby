@@ -6,10 +6,12 @@
 
 Los enunciados estarán en la parte de [Trabajos prácticos](https://sites.google.com/site/paradigmasdeprogramacion/material/trabajos-prcticos) de la página.
 
-**Nombre del Grupo:** 
+**Nombre del Grupo:Hijas de Cauchy**
 
 **Integrantes:**
 
-- ...
-- ...
+- Cortez Francisco
+- Vazquez Candela
+- Wang Tianshu
+- Yupanqui Yanela
 

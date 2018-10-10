@@ -1,27 +1,40 @@
-import rolando.*
+import personaje.*
 import hechizos.*
 import artefactos.*
 import refuerzos.*
 
 describe "Tests de la parte 3" {
 	
+	var rolando
+	var espectroMalefico
+	var espadaDelDestino
+	var mascaraOscura 
+	var armadura
+	var cotaDeMalla 
+	var armaduraExtra 
+	
 	fixture{
-		rolando.hechizoPreferido(espectroMalefico)
-		espectroMalefico.nombre("Espectro Malefico")
-		armadura.refuerzo(ningunRefuerzo)	
-		rolando.agregarArtefactos([espadaDelDestino,collarDivino,mascaraOscura,armadura,espejo])
+		
+		espectroMalefico = new Logo(multiplo = 1, nombre = 'espectro malefico')
+		mascaraOscura = new Mascara(indiceOscuridad = 1,valorLuchaMinimo = 4)
+		espadaDelDestino = new Espada()	
+		armadura = new Armadura(refuerzo = ningunRefuerzo,valorBase = 2)
+		cotaDeMalla = new CotaDeMalla(unidadLucha = 1)
+		rolando = new Personaje(artefactos = [espadaDelDestino,collarDivino,mascaraOscura,armadura,espejo], hechizoPreferido = espectroMalefico)
+		libroDeHechizos.agregarHechizos([espectroMalefico,hechizoBasico])	
 	}
+	
 
 	test "Rolando esta cargado" {
 
-		assert.that(rolando.estaCargado())
+		assert.that(rolando.estasCargado())
 
 	}
 
 	test "Rolando no esta cargado despues de sacar la armadura"{
 	
 		rolando.removerArtefacto(armadura)
-		assert.notThat(rolando.estaCargado())
+		assert.notThat(rolando.estasCargado())
 	}
 
 	test "La habilidad de lucha de Rolando es 20"{
@@ -56,15 +69,24 @@ describe "Tests de la parte 3" {
 
 	test "La habilidad de lucha de Rolado es 1 si solo tiene espejo como artefacto"{
 	
-		rolando.artefactoSoloEspejo()
+		rolando.artefactos().clear()
+		rolando.agregarArtefacto(espejo)
 		assert.equals(1,rolando.habilidadDeLucha())
 	}
 
 	test "El nivel de hechiceria de Rolando es 56 si reemplazar al hechizo preferido por un libro de hechizos que contenga el espectro maléfico (con nombre “espectro maléfico”) y al hechizo básico.
 	"{
-		
+	
 		rolando.hechizoPreferido(libroDeHechizos)
 		assert.equals(56,rolando.nivelDeHechiceria())
 	
+	}
+	
+	test "Despues de agregarle a Rolando una armadura extra con base 5 y una cota de malla con valor de lucha 6, la habilida de lucha de Rolando es 37"{
+		
+		cotaDeMalla = new CotaDeMalla(unidadLucha = 6)
+		armaduraExtra = new Armadura(valorBase = 5,refuerzo = cotaDeMalla)
+		rolando.agregarArtefacto(armaduraExtra)
+		assert.equals(37,rolando.habilidadDeLucha())
 	}
 }

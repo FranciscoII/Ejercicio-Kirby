@@ -1,11 +1,16 @@
-import rolando.*
+import personaje.*
 import hechizos.*
+import eclipse.*
 
 describe "Tests de la parte 1" {
 	
+	var rolando
+	var espectroMalefico
+	
 	fixture{
-		rolando.hechizoPreferido(espectroMalefico)
-		espectroMalefico.nombre("Espectro Malefico")
+		
+		espectroMalefico = new Logo(multiplo = 1, nombre = 'espectro malefico')
+		rolando = new Personaje(hechizoPreferido = espectroMalefico)
 		
 	}
 	
