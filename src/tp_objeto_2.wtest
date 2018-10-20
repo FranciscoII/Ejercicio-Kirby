@@ -1,7 +1,6 @@
 import personaje.*
 import hechizos.*
 import artefactos.*
-import eclipse.*
 
 describe "Tests de la parte 2" {
 	
@@ -9,12 +8,14 @@ describe "Tests de la parte 2" {
 	var espectroMalefico
 	var espadaDelDestino
 	var mascaraOscura 
+	var collarDivino
 	
 	fixture{
 		
 		espectroMalefico = new Logo(multiplo = 1, nombre = 'espectro malefico')
 		mascaraOscura = new Mascara(indiceOscuridad = 1,valorLuchaMinimo = 4)
 		espadaDelDestino = new Espada()
+		collarDivino = new CollarDivino(cantPerlas = 5)
 		rolando = new Personaje(artefactos = [espadaDelDestino,collarDivino,mascaraOscura], hechizoPreferido = espectroMalefico)		
 		
 	}
@@ -45,7 +46,7 @@ describe "Tests de la parte 2" {
 
 	test "La habilidad de lucha de mascara Oscura despues de ocurrir un eclipse es 5"{
 	
-		eclipse.ocurrirEclipse(rolando)
+		eclipse.ocurrirEclipse()
 		assert.equals(5,mascaraOscura.habilidadDeLucha(rolando))
 	}
 

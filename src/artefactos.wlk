@@ -10,23 +10,8 @@ class Espada{
 
 }
 
-class Hacha{
-	
-	method habilidadDeLucha(duenio) = 3
-	
-	method precio() = 15
 
-}
-
-class Lanza{
-	
-	method habilidadDeLucha(duenio) = 3
-	
-	method precio() = 15
-
-}
-
-object collarDivino{
+class CollarDivino{
 	var property cantPerlas = 5
 
 	method habilidadDeLucha(duenio) = cantPerlas
@@ -37,7 +22,7 @@ object collarDivino{
 
 class Mascara{
 	var property indiceOscuridad = 0
-	var property valorLuchaMinimo = 4
+	var property valorLuchaMinimo = 0
 	
 	method valorLucha() = fuerzaOscura.valor() / 2 * indiceOscuridad
 	
@@ -82,32 +67,6 @@ object espejo{
 
 }
 
-
-object libroDeHechizos{
-	var hechizos = []
-	
-	method hechizos() = hechizos
-	
-	method agregarHechizos(unosHechizos){
-		
-		self.hechizos().addAll(unosHechizos)
-	}
-	
-	method hechizosPoderosos(){
-		return self.hechizos().filter({hechizo => hechizo.esPoderoso()})
-	}
-	
-	method poder(){
-		return self.hechizosPoderosos().sum({hechizo => hechizo.poder()})
-	}
-	
-	method cantHechizos() = self.hechizos().size()
-		
-	method precio(){
-		return 10 * self.cantHechizos()
-	}
-	
-}
 
 
 

@@ -6,44 +6,33 @@ import refuerzos.*
 
 object feria {
 	
-	method leCanjeasHechizo(persona,hechizo){
-		var precioApagar
-		
-		if(persona. precioMitadHechizoActual() < hechizo.precio()){
-			
-			precioApagar = hechizo.precio() - persona. precioMitadHechizoActual()
-			
-			if( precioApagar < persona.monedas()){
-				persona.pagas(precioApagar)
-				persona.hechizoPreferido(hechizo)	
-			}
-			else{
-				throw new Exception("Saldo insuficiente ! ")
-			}
+	method precioCanjeaHechizo(persona,hechizo){
+		if(persona. precioMitadHechizoActual() < hechizo.precio()){			
+			return hechizo.precio() - persona. precioMitadHechizoActual()			
 		}
-		else{
-			persona.hechizoPreferido(hechizo)
-		}	
+		return 0	
 	}
 	
-	method leCanjeasLibroDeHechizos(persona){
-		
-		libroDeHechizos.hechizosPoderosos().forEach({hechizo => persona.canjeasHechizo(hechizo)})
-		persona.pagas(libroDeHechizos.precio())
-		
+	method verificarSaldo(persona,precio){
+		if(precio > persona.monedas()){
+			throw new Exception("Saldo insuficiente ! ")
+		}
 	}
+	
+	method leCanjeasHechizo(persona,hechizo){
+		var precioPagar = self.precioCanjeaHechizo(persona,hechizo)
+		self.verificarSaldo(persona,precioPagar)
+		persona.pagas(precioPagar)
+		persona.hechizoPreferido(hechizo)			
+	}	
 	
 	method precioDeArtefactos(unosArtefactos) = unosArtefactos.sum({artefacto => artefacto.precio()})
 	
 	method leVendesArtefactos(persona,unosArtefactos){
-		if(self.precioDeArtefactos(unosArtefactos) < persona.monedas()){
-			persona.pagas(self.precioDeArtefactos(unosArtefactos))
-			persona.agregarArtefactos(unosArtefactos)
-		}
-		else{
-				throw new Exception("Saldo insuficiente ! ")
-		}
-	}
-	
+		var precioPagar = self.precioDeArtefactos(unosArtefactos)
+		self.verificarSaldo(persona,precioPagar)
+		persona.pagas(precioPagar)
+		persona.agregarArtefactos(unosArtefactos)
+	}	
 	
 }

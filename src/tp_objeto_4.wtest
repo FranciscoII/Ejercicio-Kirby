@@ -10,9 +10,11 @@ describe "Tests de la parte 4" {
 	var thor
 	var loki
 	var alacachulaCachicomula
+	var collarDivino
 	
 	fixture{
 		
+		collarDivino = new CollarDivino(cantPerlas = 5)
 		alacachulaCachicomula = new Logo(multiplo = 1, nombre = 'alacachula cachicomula')
 		xenia = new Personaje(hechizoPreferido = alacachulaCachicomula )
 		thor = new Personaje(hechizoPreferido = hechizoBasico)
@@ -88,8 +90,8 @@ describe "Tests de la parte 4" {
 	
 	test "A Xenia le queda 69 monedas por canjear un libro de hechizos que contiene el hechizo de logos de nombre “alacachula cachicomula” y el hechizo básico." {
 		
-		libroDeHechizos.agregarHechizos([alacachulaCachicomula,hechizoBasico])
-		xenia.canjeasLibroDeHechizos()
+		var libroDeHechizos = new LibroDeHechizos(hechizos = [alacachulaCachicomula,hechizoBasico])
+		xenia.canjeasHechizo(libroDeHechizos)
 		assert.equals(69,xenia.monedas())
 		
 	}

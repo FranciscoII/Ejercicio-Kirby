@@ -1,24 +1,28 @@
 import hechizos.*
 import artefactos.*
 import refuerzos.*
-import eclipse.*
 import feria.*
 
 object fuerzaOscura{
 	var property valor = 5
+	
+	method recibirEclipse(){
+		valor = valor * 2
+	}
+}
 
+object eclipse{
+	method ocurrirEclipse(){
+		fuerzaOscura.recibirEclipse()
+	}
 }
 
 class Personaje{
 	var property hechizoPreferido 
 	var property valorBaseLucha = 1
 	var property artefactos = []
-	var property monedas = 100
-		
-	method recibirEclipse(){
-		
-		fuerzaOscura.valor(fuerzaOscura.valor() * 2)
-	}
+	var property monedas = 100	
+	
 	
 	method poderHechizoPreferido() = hechizoPreferido.poder()
 	
@@ -79,12 +83,7 @@ class Personaje{
 	method canjeasHechizo(hechizo){
 		feria.leCanjeasHechizo(self,hechizo)
 	}	
-	
-	
-	method canjeasLibroDeHechizos(){		
-		feria.leCanjeasLibroDeHechizos(self)		
-	}	
-	
+		
 	method comprasArtefactos(unosArtefactos){
 		feria.leVendesArtefactos(self,unosArtefactos)
 		

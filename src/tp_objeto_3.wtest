@@ -12,6 +12,8 @@ describe "Tests de la parte 3" {
 	var armadura
 	var cotaDeMalla 
 	var armaduraExtra 
+	var collarDivino
+	var libroDeHechizos
 	
 	fixture{
 		
@@ -20,8 +22,10 @@ describe "Tests de la parte 3" {
 		espadaDelDestino = new Espada()	
 		armadura = new Armadura(refuerzo = ningunRefuerzo,valorBase = 2)
 		cotaDeMalla = new CotaDeMalla(unidadLucha = 1)
+		collarDivino = new CollarDivino(cantPerlas = 5)
+		libroDeHechizos = new LibroDeHechizos(hechizos = [espectroMalefico,hechizoBasico])	
 		rolando = new Personaje(artefactos = [espadaDelDestino,collarDivino,mascaraOscura,armadura,espejo], hechizoPreferido = espectroMalefico)
-		libroDeHechizos.agregarHechizos([espectroMalefico,hechizoBasico])	
+		
 	}
 	
 

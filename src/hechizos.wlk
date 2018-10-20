@@ -37,3 +37,29 @@ object hechizoBasico{
 }
 
 
+class LibroDeHechizos{
+	var property hechizos = []
+	
+	method agregarHechizos(unosHechizos){
+		
+		hechizos.addAll(unosHechizos)
+	}
+	
+	method hechizosPoderosos(){
+		return hechizos.filter({hechizo => hechizo.esPoderoso()})
+	}
+	
+	method poder(){
+		return self.hechizosPoderosos().sum({hechizo => hechizo.poder()})
+	}
+	
+	method cantHechizos() = self.hechizos().size()
+		
+	method precio(){
+		return 10 * self.cantHechizos() + self.poder()
+	}
+	
+}
+
+
+
