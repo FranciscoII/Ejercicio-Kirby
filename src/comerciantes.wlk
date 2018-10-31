@@ -39,7 +39,7 @@ class Comerciante{
 	}	
 	
 	method recategorizarse(){
-		categoria.subirCategoria(self)
+		categoria.recategorizarse(self)
 	}	
 }
 
@@ -48,7 +48,7 @@ class ComercianteIndependiente {
 	
 	method precioAcobrar(comerciante,artefactos) = comerciante.precioDeArtefactos(artefactos) * (1 + comision)
 	
-	method subirCategoria(comerciante){
+	method recategorizarse(comerciante){
 		comision *= 2
 		self.verificarComision(comerciante)		
 	}
@@ -64,7 +64,7 @@ class ComercianteRegistrado {
 
 	method precioAcobrar(comerciante,artefactos) = comerciante.precioDeArtefactos(artefactos) * 1.21	
 	
-	method subirCategoria(comerciante){
+	method recategorizarse(comerciante){
 		comerciante.categoria(new ComercianteImpuesto())
 	}
 } 
@@ -79,7 +79,7 @@ class ComercianteImpuesto  {
 		return (comerciante.precioDeArtefactos(artefactos)+(diferencia*0.35)).max(comerciante.precioDeArtefactos(artefactos))
 	}	
 	
-	method subirCategoria(comerciante){}
+	method recategorizarse(comerciante){}
 }
 
 class ComercianteSinCategoria{
