@@ -2,8 +2,9 @@ import personaje.*
 import artefactos.*
 import hechizos.*
 
-class CotaDeMalla{
-	var property unidadLucha
+object cotaDeMalla{
+	var property unidadLucha = 5
+	var property pesoAdicional = 1
 	
 	method habilidadDeLucha(duenio) = self.unidadLucha()
 	
@@ -11,6 +12,7 @@ class CotaDeMalla{
 }
 
 object bendicion{
+	var property pesoAdicional = 0
 	
 	method habilidadDeLucha(duenio) = duenio.nivelDeHechiceria()
 	
@@ -18,6 +20,7 @@ object bendicion{
 }
 
 object ningunRefuerzo{
+	var property pesoAdicional = 0
 	
 	method habilidadDeLucha(duenio) = 0
 	

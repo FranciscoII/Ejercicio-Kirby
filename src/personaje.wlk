@@ -1,28 +1,14 @@
 import hechizos.*
 import artefactos.*
 import refuerzos.*
-import feria.*
-
-object fuerzaOscura{
-	var property valor = 5
-	
-	method recibirEclipse(){
-		valor = valor * 2
-	}
-}
-
-object eclipse{
-	method ocurrirEclipse(){
-		fuerzaOscura.recibirEclipse()
-	}
-}
+import comerciantes.*
 
 class Personaje{
-	var property hechizoPreferido 
+	var property hechizoPreferido = hechizoBasico
 	var property valorBaseLucha = 1
 	var property artefactos = []
 	var property monedas = 100	
-	
+	const cargaMaxima = 0
 	
 	method poderHechizoPreferido() = hechizoPreferido.poder()
 	
@@ -42,7 +28,7 @@ class Personaje{
 		artefactos.addAll(unosArtefactos)
 	}
 	
-	method removerArtefacto(artefacto){
+	method desprenderArtefacto(artefacto){
 		artefactos.remove(artefacto)
 	}
 	
@@ -80,12 +66,36 @@ class Personaje{
 	
 	method precioMitadHechizoActual() = hechizoPreferido.precio() / 2
 		
-	method canjeasHechizo(hechizo){
-		feria.leCanjeasHechizo(self,hechizo)
+	method canjeasHechizo(alguien,hechizo){
+		alguien.leCanjeasHechizo(self,hechizo)
 	}	
 		
-	method comprasArtefactos(unosArtefactos){
-		feria.leVendesArtefactos(self,unosArtefactos)
-		
+	method comprasArtefactos(alguien,unosArtefactos){
+		self.verificarCarga(unosArtefactos)
+		alguien.leVendesArtefactos(self,unosArtefactos)
 	}	
+	
+	method verificarCarga(unosArtefactos){
+		if(unosArtefactos.sum({a => a.pesoTotal()}) > cargaMaxima){
+			throw new Exception("pesoBase superado!")
+		}
+	}
+	
+	method cargaTotal(){
+		return artefactos.sum({artefacto => artefacto.pesoTotal()})
+	}
+}
+
+object fuerzaOscura{
+	var property valor = 5
+	
+	method recibirEclipse(){
+		valor = valor * 2
+	}
+}
+
+object eclipse{
+	method ocurrirEclipse(){
+		fuerzaOscura.recibirEclipse()
+	}
 }

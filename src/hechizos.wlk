@@ -2,42 +2,53 @@ import personaje.*
 import refuerzos.*
 import artefactos.*
 
-class Logo{
+class Hechizo{
+	method poder()
+	
+	method precio() = self.poder()
+	
+	method pesoAdicional(){
+		if(self.poder().even()) return 2
+		else return 1
+	}
+}
+
+class HechizoLogo inherits Hechizo {
 	var property nombre
-	var property multiplo
+	var property multiplo = 1
 		
 	method cantLetraNombre() = nombre.length()
 		
-	method poder() = self.cantLetraNombre() * multiplo
+	override method poder() = self.cantLetraNombre() * multiplo
 		
 	method esPoderoso(){
 		return self.poder() > 15
 	}
 	
 	method habilidadDeLucha(duenio) = self.poder()
-	
-	method precio() = self.poder()
-	
+		
 	method costo(armadura) = armadura.valorBase() + self.precio()
+
 }
 
+class HechizoComercial inherits HechizoLogo{
+	var property porcentaje = 0.2
+	override method poder() = porcentaje * self.cantLetraNombre() * multiplo
+}
 
-object hechizoBasico{
+object hechizoBasico inherits Hechizo {
 	
-	method poder() = 10
+	override method poder() = 10
 	
 	method esPoderoso() = false
 	
 	method habilidadDeLucha(duenio) = self.poder()
-	
-	method precio() = 10
-	
+		
 	method costo(armadura) = armadura.valorBase() + self.precio()
 
 }
 
-
-class LibroDeHechizos{
+class LibroDeHechizos inherits Hechizo {
 	var property hechizos = []
 	
 	method agregarHechizos(unosHechizos){
@@ -49,16 +60,16 @@ class LibroDeHechizos{
 		return hechizos.filter({hechizo => hechizo.esPoderoso()})
 	}
 	
-	method poder(){
+	override method poder(){
 		return self.hechizosPoderosos().sum({hechizo => hechizo.poder()})
 	}
 	
 	method cantHechizos() = self.hechizos().size()
-		
-	method precio(){
+	
+	override method precio(){
 		return 10 * self.cantHechizos() + self.poder()
 	}
-	
+		
 }
 
 
