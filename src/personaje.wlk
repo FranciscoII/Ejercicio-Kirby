@@ -76,7 +76,7 @@ class Personaje{
 	}	
 	
 	method verificarCarga(unosArtefactos){
-		if(unosArtefactos.sum({a => a.pesoTotal()}) > cargaMaxima){
+		if(unosArtefactos.sum({a => a.pesoTotal()}) + self.cargaTotal() > cargaMaxima){
 			throw new Exception("pesoBase superado!")
 		}
 	}

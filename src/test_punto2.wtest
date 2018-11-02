@@ -19,7 +19,7 @@ describe "Tests Puntos pesoBases de los artefactos" {
 	var armaduraNada = new Armadura(refuerzo = ningunRefuerzo,pesoBase = 12)
 	var merlin = new Personaje(monedas = 100,cargaMaxima = 10)
 	var ursula = new Personaje(monedas = 100,cargaMaxima = 200,artefactos = [mascaraOscura,armaduraCotaDeMalla])
-	var mockHnos = new Comerciante()
+	var mockHnos = new Comerciante(categoria = new ComercianteSinCategoria())
 
 	test "El pesoBase de la espada vieja es 6kg" {
 		espadaVieja.calcularDiasDeCompra()

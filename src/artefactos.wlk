@@ -12,7 +12,7 @@ class Artefacto{
 	var diasDeCompra = 0
 
 	method calcularDiasDeCompra(){
-		diasDeCompra = hoy.fecha() - fechaDeCompra
+		diasDeCompra = new Date() - fechaDeCompra
 	}
 		
 	method factorCorreccion() = (diasDeCompra/1000).min(1)

@@ -70,7 +70,7 @@ class ComercianteRegistrado {
 } 
 
 class ComercianteImpuesto  {
-	var property minimo 
+	var property minimo = 5
 	
 	method diferenciaPrecioYminimo(comerciante,artefactos) = comerciante.precioDeArtefactos(artefactos) - minimo
 	

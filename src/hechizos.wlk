@@ -33,20 +33,11 @@ class HechizoLogo inherits Hechizo {
 
 class HechizoComercial inherits HechizoLogo{
 	var property porcentaje = 0.2
-	override method poder() = porcentaje * self.cantLetraNombre() * multiplo
+	override method poder() = porcentaje * super()
 }
 
-object hechizoBasico inherits Hechizo {
-	
-	override method poder() = 10
-	
-	method esPoderoso() = false
-	
-	method habilidadDeLucha(duenio) = self.poder()
-		
-	method costo(armadura) = armadura.valorBase() + self.precio()
+object hechizoBasico inherits HechizoLogo(nombre = "hechizoaaa") {}
 
-}
 
 class LibroDeHechizos inherits Hechizo {
 	var property hechizos = []
