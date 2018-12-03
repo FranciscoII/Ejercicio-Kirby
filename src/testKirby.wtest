@@ -1,0 +1,18 @@
+import kirby.*
+describe "Test de la primera parte"{
+	var fran = new Enemigo("Francisco",20,0,salpicadura)
+	var pabloPerez = new Enemigo("Amarilla Perez",15,0,fuego)
+	var rickiCenturion = new Enemigo("ricardo",300,2,new StreetFighter(7))
+
+	fixture{
+		kirby.absorber(pabloPerez)
+		}
+	test "a Fran le quedan 10 de vida despues de ser atacado por Kirby con fuego" {
+		kirby.atacar(fran)
+		assert.equals(10,fran.vida())
+		}
+		test "a Kirby le quedan 65 de vida despues de encontrarse con Ricki Centurion"{
+			rickiCenturion.atacar(kirby)
+			assert.equals(65,kirby.vida())
+		}
+}
